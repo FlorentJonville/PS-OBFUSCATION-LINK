@@ -1,0 +1,30 @@
+
+// ****************
+// CUSTOM.JS
+// ****************
+
+// DECODE URL
+function decodeBase64Url(base64Url) {
+  const padding = '='.repeat((4 - base64Url.length % 4) % 4);
+  const base64 = (base64Url + padding).replace(/\-/g, '+').replace(/_/g, '/');
+  return decodeURIComponent(escape(atob(base64)));
+}
+
+// REDIRECT TO URL
+$(document).ready(function(){
+	$('.url-obf').on('click', function(){
+		window.location = decodeBase64Url($(this).data('href'));
+	});
+)};
+
+
+// ****************
+// PRODUCT-LIST
+// ****************
+<div data-href="{$product.url|base64_encode|escape:'html':'UTF-8'}" class="url-obf">IMG OR BTN</div>
+
+
+// ****************
+// CUSTOM.CSS
+// ****************
+.url-obf { cursor: pointer; }

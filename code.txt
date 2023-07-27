@@ -10,11 +10,36 @@ function decodeBase64Url(base64Url) {
   return decodeURIComponent(escape(atob(base64)));
 }
 
-// REDIRECT TO URL
+// ENCODE URL
+function encodeBase64(str) {
+  const base64 = btoa(unescape(encodeURIComponent(str)));
+  return base64;
+}
+
 $(document).ready(function(){
+
+	// REDIRECT TO URL
 	$('.url-obf').on('click', function(){
 		window.location = decodeBase64Url($(this).data('href'));
 	});
+
+	// Récupérer tous les éléments avec la classe "encodeBase64"
+  	const encodedLinks = document.getElementsByClassName("encodeBase64");
+
+  	// Parcourir tous les liens avec la classe "encodeBase64"
+  	for (let i = 0; i < encodedLinks.length; i++) {
+    	const linkElement = encodedLinks[i];
+
+    	// Obtenir le lien à partir de l'attribut data-href
+    	const currentUrl = linkElement.getAttribute("data-href");
+
+    	// Encodage de l'URL en base64
+    	const encodedUrl = encodeBase64(currentUrl);
+
+    	// Mettre à jour l'attribut data-link avec l'URL encodée en base64
+    	linkElement.setAttribute("data-href", encodedUrl);
+	}
+
 });
 
 

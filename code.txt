@@ -15,7 +15,7 @@ $(document).ready(function(){
 	$('.url-obf').on('click', function(){
 		window.location = decodeBase64Url($(this).data('href'));
 	});
-)};
+});
 
 
 // ****************
